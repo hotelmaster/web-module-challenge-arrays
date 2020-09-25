@@ -120,6 +120,7 @@ Hint: You can use .splice() for this
 */
 
 // define function and pass parameters
+// note when passing the argument in the function call, the flavor is case sensitive!
 function removeFlavorByName(originalFlavors, flavor){
     // for-in loop to check for specified flavor only for indices in the array
     for(let index in originalFlavors) {
@@ -172,17 +173,17 @@ hint - you can use the .includes method to help you solve this */
 function filterByWord(originalFlavors, highlightedFlav){
 
     // declare another array to store highlighted flavors
-    let filteredArray = new Array();
+    let filteredArray = [];
     // for-in loop to look through the array
     for(let index in originalFlavors) {
         // if any of the array elements contain / include the string passed into this function,
         // then use push method to add them to end of filteredArray
-        if(originalFlavors[index].includes(highlightedFlav){
+        if(originalFlavors[index].includes(highlightedFlav)){
             // use push method to add the flavor to new array
-            filteredArray.push(highlightedFlav);
+            filteredArray.push(originalFlavors[index]);
         }
     }
-    // return the chosen flavors containing the string
+    // return the chosen flavors (the entire string, not only the string i.e. chocolate)
     return filteredArray;
 }
 

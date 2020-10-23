@@ -7,7 +7,7 @@ var originalFlavors = ["Banana Nut Fudge",
     "Chocolate Almond",
     "Chocolate Chip",
     "Chocolate Fudge",
-    "Chocolate Mint",
+    "Chocolate Mint",  
     "Chocolate Ribbon",
     "Coffee",
     "Coffee Candy",
@@ -40,10 +40,15 @@ To save you from having to count the items above, you can assume that length of 
 
 i.e. is31Flavors(originalFlavors) will return TRUE.*/
 
-function is31Flavors(/*code here*/){
-
-    /*code here*/
-
+// Define is31Flavors function, pass through the array of strings
+function is31Flavors(originalFlavors){
+    // if correct length, return true
+    if(originalFlavors.length == 31) {
+        return true;
+    } // Otherwise, return false
+    else {
+        return false;
+    }
 }
 
 /* Task 2: Corporate has come to you with an idea for a new flavor: Rainbow Sherbert! They think this will be a game changer. You need to modify the array to include this flavor. 
@@ -57,10 +62,13 @@ Your function should add the flavor to the front of the array and console.log th
 
 For example addFlavor("Rainbow Sherbert", originalFlavors) should return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla Burnt Almond"] */ 
 
-function addFlavor(/*code here*/){
-
-    /*code here*/
-
+// define function and pass through the array and a string variable called flavor
+// which will be decided when the function is called and arguments are passed
+function addFlavor(originalFlavors, flavor){
+    // Add the flavor of choice to beginning of array with .unshift() method
+    originalFlavors.unshift(flavor);
+    // display the result when function is called/invoked
+    console.log(originalFlavors);
 }
 
 
@@ -74,10 +82,11 @@ Your function should remove a flavor from the end of the array and console.log t
 
 For example removeLastFlavor(originalFlavors) would return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla"]*/ 
 
-function removeLastFlavor(/*code here*/){
-
-    /*code here*/
-
+function removeLastFlavor(originalFlavors){
+    // use .pop() array method to remove last array element at index = length - 1
+    originalFlavors.pop();
+    // display the result
+    console.log(originalFlavors);
 }
 
 /* Task 4: Write a function that returns a flavor at a given index in the array.
@@ -89,13 +98,15 @@ Your function should accept:
 
 For example, getFlavorByIndex(originalFlavors, 2) would return "Black Walnut", assuming Rainbow Sherbert has been added successfully. */
 
-function getFlavorByIndex(/*code here*/){
-
-    /*code here*/
-
+// define function and pass through parameters
+function getFlavorByIndex(originalFlavors, index){
+    // return the array element with the given index
+    return originalFlavors[index];
 }
 
-/* Task 5: As corporate wants to add more and more flavors to their lineup, they've realized that they need to remove flavors based on flavor name, as opposed to just arbitrarily removing the first or last flavor. Your task is to get an index by flavor name, and remove that flavor from the array. 
+/* Task 5: As corporate wants to add more and more flavors to their lineup, they've realized that they need to remove flavors based on flavor name, 
+           as opposed to just arbitrarily removing the first or last flavor. Your task is to get an index by flavor name, and remove that flavor from 
+           the array. 
 
 Your function should accept: 
 
@@ -108,10 +119,20 @@ Hint: You can use .splice() for this
 
 */
 
-function removeFlavorByName(/*code here*/){
-
-    /*code here*/
-
+// define function and pass parameters
+// note when passing the argument in the function call, the flavor is case sensitive!
+function removeFlavorByName(originalFlavors, flavor){
+    // for-in loop to check for specified flavor only for indices in the array
+    for(let index in originalFlavors) {
+        // If we find the specified flavor, use the corresponding index to splice it out of the array
+        if(originalFlavors[index] == flavor) {
+            // splice method will remove the elelment with the given index
+            // we are not replacing it with any other flavor
+            originalFlavors.splice(index, 1);
+            // return the updated array
+            return originalFlavors; 
+        }
+    }
 }
 
 
@@ -123,13 +144,17 @@ Your function should accept:
 
 and should return a new array that is identical to the old array. You can name the new array however you'd like. */
 
-function copy(/*code here*/){
-
-    /*code here*/
-
+function copy(originalFlavors, clonedFlavors){
+    // use spread operator to clone contents to new memory location
+    clonedFlavors = [...originalFlavors];
+    // return the cloned array
+    return clonedFlavors;
 }
 
-/* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
+/* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors.
+           Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. 
+           Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". This way you 
+           could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
 
 Your function should accept: 
 
@@ -144,34 +169,79 @@ DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem.
 
 hint - you can use the .includes method to help you solve this */
 
-function filterByWord(/*code here*/){
+// define function and pass through array and string highlightedFlav
+function filterByWord(originalFlavors, highlightedFlav){
 
-    /*code here*/
-
+    // declare another array to store highlighted flavors
+    let filteredArray = [];
+    // for-in loop to look through the array
+    for(let index in originalFlavors) {
+        // if any of the array elements contain / include the string passed into this function,
+        // then use push method to add them to end of filteredArray
+        if(originalFlavors[index].includes(highlightedFlav)){
+            // use push method to add the flavor to new array
+            filteredArray.push(originalFlavors[index]);
+        }
+    }
+    // return the chosen flavors (the entire string, not only the string i.e. chocolate)
+    return filteredArray;
 }
-
-
 
 /* 🧁🍦🍨 STRETCH 🍨🍦🍫*/ 
 
-/* STRETCH 1: Write a function that returns the average number of words in an array. You should be able to use this function for any array, but can test with originalFlavors.
+/* STRETCH 1: Write a function that returns the average number of words in an array. You should be able to use this function for any array,
+              but can test with originalFlavors.
 
 Your function should accept: 
 
 (1) an array
 
-and should return the average number of words per item in the array. 
+and should return the average number of words per string item in the array. 
 
-For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
+For example, when it is called getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
 
-function getAverageWordLength(/*code here*/){
+// my own example function call: console.log(getAverageWordLength(originalFlavors));
+// expected outout for originalFlavors array is 2. 
 
-    /*code here*/
+// define function and pass array
+function getAverageWordLength(originalFlavors){
+    // declare a variable for the number of spaces in a string
+    let spaces = 0;
+    // variables for number of words in one string, and total words accumulated from beginning of array
+    let numWords = 0, totWords = 0;
 
+    // for loop to look through each string flavor
+    for(let i = 0; i < originalFlavors.length; i++) {
+        // second for loop to search through that specific string
+        // it will stop searching once the length of the string is complete
+        // i.e. all the indices in the index=i string of the originalFlavors array (ex. originalFlavors[0] = "Banana Nut Fudge" this element has index=0, but the string contains indices 0-14)
+        for(let index in originalFlavors[i].length) {
+            // if there is a space increment 
+            if(originalFlavors[i][index] == " ") {
+                space++;
+            }
+        }
+        // no more spaces are in the string
+        // and the number of words will always be one more than the number of space ("the cat runs" has 2 spaces so 3 words)
+        // need a way to determine how many words in the string
+        numWords = spaces + 1;
+        // reset spaces to 0 for the next i value (the next string / flavor) in the for loop
+        spaces = 0;
+        // need to keep a running total of the words in the strings for entire originalFlavors array
+        totWords += numWords;
+        // reset numWords to 0 for next i value / string / flavor
+        numWords = 0;
+        // now the first for loop will continue to next i value...
+    }
+    // after leaving main for loop, we will have the total number of words from each string added to make the totWords value
+    // the average number of words per string is given by avg = totWords / 31
+    // we can return the calculation without storing it in a new variable
+    return Math.round(totWords / 31);
 }
 
 
-/* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors.
+/* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors from originalFlavors,
+              newFlavors, seasonalFlavors, and regionalFlavors.
 
 Your function should accept 4 different arrays,
 
@@ -252,8 +322,64 @@ var regionalFlavors = ["Pink Bubblegum",
     "Chocolate Chocolate Chip Cheesecake",
     "Caramel 'n' Cookies"]
 
-function getRandomFlavors(/*code here*/){
+function getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors){
 
-    /*code here*/
+    // Need to select random numbers in a range of the indices for each of the 4 arrays.
+    // Could choose 31 / 4 = 7 and 3 / 4 = 7.75 flavors from each array.
+    // 8 flavors from three of the arrays makes 24 flavors, we need 31 - 24 = 7 remaining
+    // flavors from the fourth array.
+
+    // How to choose random numbers in a range?
+    // Math.round(Math.random()*[max - min]) + min
+    // ex. between 0 and 3: Math.round((Math.random()*(3 - 0)) + 0
+    // between 0 and n: Math.round((Math.random()*(n - 0)) + 0
+    // or Math.round((Math.random()*n)
+    // The value of n will be one less than the length of the array (which are the numbers of indices we are randomly selecting from 0 through one less than the length)
+
+    // need a loop to get about 8 random flavors chosen from each array
+    // if we use .push() the first 8 flavors pushed into the randomFlavors array will have indices 0-7
+    // the next 8 flavors pushed into the randomFlavors array will have indices 8-15 which is 8 more spots
+    // the next 8 flavors will have indices 16-23
+    // the last 7 flavors will be 24-30
+    // in total this will contain 31 flavors picked randomly from each of the four arrays
+
+    // variable if i want to store the random number first and then use it as an index then it will be easier to read the code
+    let randomIndex;
+
+    // for-loop for originalFlavors array.
+    // this one will loop 8 times, getting indices 0 through 7 in randomFlavors array
+    for(let i = 0; i < 8; i++) {
+        // Store the random index value in randomIndex
+        randomIndex = Math.round(Math.random()*(originalFlavors.length - 1));
+        // use push method to put the random number in the index of originalFlavors array and push the flavor into the new array randomFlavors
+        randomFlavors.push(originalFlavors[randomIndex]);
+    }
+    // for-loop for newFlavors array.
+    // this one will loop 8 times, getting indices 8-15 in randomFlavors array 
+    for(let i = 0; i < 8; i++) {
+        // Same as first for-loop
+        randomIndex = Math.round(Math.random()*(newFlavors.length - 1));
+        // use push method to put the random number in the index of newFlavors array and push the flavor into the new array randomFlavors
+        randomFlavors.push(newFlavors[randomIndex]);
+    }
+    // for-loop for seasonalFlavors array.
+    // this one will loop 8 times
+    for(let i = 0; i < 8; i++) {
+        // Same as other for-loops
+        randomIndex = Math.round(Math.random()*(seasonalFlavors.length - 1));
+        // use push method to put the random number in the index of seasonalFlavors array and push the flavor into the new array randomFlavors
+        randomFlavors.push(seasonalFlavors[randomIndex]);
+    }
+    // for-loop for reginalFlavors array.
+    // this one will loop 7 times
+    for(let i = 0; i < 7; i++) {
+        // Same as before
+        randomIndex = Math.round(Math.random()*(regionalFlavors.length - 1));
+        // use push method to put the random number in the index of regionalFlavors array and push the flavor into the new array randomFlavors
+        randomFlavors.push(regionalFlavors[randomIndex]);
+    }
+    // console.log(randomFlavors);
+    // return the randomFlavors array
+    return randomFlavors;
 
 }
